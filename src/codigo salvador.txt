@@ -1,0 +1,114 @@
+
+
+CREATE TABLE old_HDD2
+SELECT film_id, actor_id, od.title, od.actor_name, od.category_id
+FROM films f
+INNER JOIN old_HDD od
+ON f.title = od.title
+INNER JOIN actors a
+ON od.actor_name = a.actor_name
+;
+DROP TABLE old_HDD;
+SELECT * FROM old_HDD2;
+ALTER TABLE old_HDD2
+RENAME TO old_HDD;
+SELECT * FROM old_HDD;
+ALTER TABLE old_HDD
+DROP COLUMN title;
+ALTER TABLE old_HDD
+DROP COLUMN actor_name;
+
+______________________________________________________
+
+-- MySQL Workbench Synchronization
+-- Generated: 2022-11-06 11:45
+-- Model: New Model
+-- Version: 1.0
+-- Project: Name of the project
+-- Author: Ari
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+ALTER TABLE `cinema`.`actors` 
+CHANGE COLUMN `actor_id` `actor_id` BIGINT(20) NOT NULL ,
+ADD PRIMARY KEY (`actor_id`);
+;
+
+ALTER TABLE `cinema`.`category` 
+CHANGE COLUMN `category_id` `category_id` BIGINT(20) NOT NULL ,
+ADD PRIMARY KEY (`category_id`);
+;
+
+ALTER TABLE `cinema`.`films` 
+CHANGE COLUMN `film_id` `film_id` BIGINT(20) NOT NULL ,
+ADD PRIMARY KEY (`film_id`),
+ADD INDEX `fk_films_language1_idx` (`language_id` ASC) VISIBLE;
+;
+
+ALTER TABLE `cinema`.`inventory` 
+CHANGE COLUMN `inventory_id` `inventory_id` BIGINT(20) NOT NULL ,
+ADD PRIMARY KEY (`inventory_id`),
+ADD INDEX `fk_inventory_films1_idx` (`film_id` ASC) VISIBLE;
+;
+
+ALTER TABLE `cinema`.`language` 
+CHANGE COLUMN `language_id` `language_id` BIGINT(20) NOT NULL ,
+ADD PRIMARY KEY (`language_id`);
+;
+
+ALTER TABLE `cinema`.`old_hdd` 
+ADD INDEX `fk_old_hdd_films1_idx` (`film_id` ASC) VISIBLE,
+ADD INDEX `fk_old_hdd_category1_idx` (`category_id` ASC) VISIBLE,
+ADD INDEX `fk_old_hdd_actors1_idx` (`actor_id` ASC) VISIBLE;
+;
+
+ALTER TABLE `cinema`.`rental` 
+CHANGE COLUMN `rental_id` `rental_id` BIGINT(20) NOT NULL ,
+ADD PRIMARY KEY (`rental_id`),
+ADD INDEX `fk_rental_inventory_idx` (`inventory_id` ASC) VISIBLE;
+;
+
+ALTER TABLE `cinema`.`films` 
+ADD CONSTRAINT `fk_films_language1`
+  FOREIGN KEY (`language_id`)
+  REFERENCES `cinema`.`language` (`language_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+ALTER TABLE `cinema`.`inventory` 
+ADD CONSTRAINT `fk_inventory_films1`
+  FOREIGN KEY (`film_id`)
+  REFERENCES `cinema`.`films` (`film_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+ALTER TABLE `cinema`.`old_hdd` 
+ADD CONSTRAINT `fk_old_hdd_films1`
+  FOREIGN KEY (`film_id`)
+  REFERENCES `cinema`.`films` (`film_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION,
+ADD CONSTRAINT `fk_old_hdd_category1`
+  FOREIGN KEY (`category_id`)
+  REFERENCES `cinema`.`category` (`category_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION,
+ADD CONSTRAINT `fk_old_hdd_actors1`
+  FOREIGN KEY (`actor_id`)
+  REFERENCES `cinema`.`actors` (`actor_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+ALTER TABLE `cinema`.`rental` 
+ADD CONSTRAINT `fk_rental_inventory`
+  FOREIGN KEY (`inventory_id`)
+  REFERENCES `cinema`.`inventory` (`inventory_id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

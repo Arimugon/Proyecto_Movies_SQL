@@ -1,0 +1,83 @@
+1. EL número de películas cuyo alquiler ha sido superior a tres días.
+
+select f.title , f.rental_duration, a.actor_name
+from films as f
+left join old_HDD as o
+on f.film_id=o.film_id
+left join actors as a 
+on o.actor_id=a.actor_id
+where f.rental_duration>3
+order by f.rental_duration desc;
+
+2. EL número de películas en las que ha trabajado cada actor.
+
+SELECT actor_name, COUNT(title) AS  x
+FROM actors as a
+left join old_hdd as o 
+on a.actor_id=o.actor_id
+left join films as f
+on o.film_id=f.film_id
+GROUP BY actor_name;
+
+3. Categorias con mayor numero de películas ordenadas de manera descendente.
+
+select c.name, count(c.category_id) as num
+from category as c
+
+left join old_HDD as o
+on o.category_id = c.category_id
+
+left join films as f
+on f.film_id = o.film_id
+
+group by c.name
+order by num desc
+;
+
+
+4.Calculo la película que más beneficio ha dado calculando el suplemento de alquiler por el numero de días mas lo que cuesta la película en sí y ordenado de manera descendente.
+
+
+select title, sum((rental_rate*rental_duration)+replacement_cost) as cost
+from films as f
+group by title
+order by cost desc;
+
+
+5. Agrupo dos columnas por un valor común y utilizando e innerjoin, en este caso los títulos de pelícuas y en lenguaje en el que están.
+
+SELECT f.title as 'titulos', l.name as 'Idioma'
+FROM films as f
+inner JOIN language as l
+ON  f.language_id=l.language_id;
+
+6. Crear tabla temporal con la id de rental y tan solo las fechas retirada y entrega de las películas.
+
+create temporary table fecharent
+select rental_id, LEFT((rental_date),10) AS fecharent, RIGHT((rental_date),8) as horarent from rental ;
+create temporary table fecharetu
+select rental_id, LEFT((return_date),10) AS fecharetu, RIGHT((return_date),8) as horaretu from rental ;
+
+create temporary table entrega_devolucion
+select fecharent.rental_id, fecharent.fecharent, fecharetu.fecharetu
+from fecharent
+left join fecharetu
+on fecharent.rental_id=fecharetu.rental_id
+group by rental_id;
+
+
+
+7.Calcular la media de días que han estado alquiladas.
+
+SELECT rental_id, TIMESTAMPDIFF(day, fecharent, fecharetu) AS media_de_dias FROM entrega_devolucion ;
+
+8.Seleccionar peliculas que no tengan valores nulos y que pertenezcan al genero de terror.
+
+SELECT  f.film_id, f.title, c.name
+FROM films as f
+left join old_HDD as o
+on f.film_id=o.film_id
+left join category as c
+on o.category_id= c.category_id
+where c.name  is not Null and  c.name='Horror';
+
