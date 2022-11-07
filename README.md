@@ -1,10 +1,10 @@
 # Proyecto_Movies_SQL
 
-En este proyecto partimos de una carpeta con un numero de csv que contienen información sobre lo que parece ser un videoclub.
+En este proyecto partimos de una carpeta con un número de csv que contienen información sobre lo que parece ser un videoclub.
 
 Se nos pide que:
 
-  1.Realicemos una limpieza de los csv, una creación de un diagrama que relacione todos los csv.
+  1.Realicemos una limpieza de los csv.
   
   2.Exportemos todo el contenido de los csv y creemos una base de datos con relaciones (diagrama).
   

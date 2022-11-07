@@ -71,7 +71,7 @@ group by rental_id;
 
 SELECT rental_id, TIMESTAMPDIFF(day, fecharent, fecharetu) AS media_de_dias FROM entrega_devolucion ;
 
-8.Seleccionar peliculas que no tengan valores nulos y que pertenezcan al genero de terror.
+8.Seleccionar películas que no tengan valores nulos y que pertenezcan al género de terror.
 
 SELECT  f.film_id, f.title, c.name
 FROM films as f
@@ -80,4 +80,24 @@ on f.film_id=o.film_id
 left join category as c
 on o.category_id= c.category_id
 where c.name  is not Null and  c.name='Horror';
+
+9. Películas en Italiano.
+
+SELECT f.title, l.name as original_language
+FROM films as f
+LEFT JOIN language as l
+ON l.language_id = f.language_id
+WHERE l.name = 'Italian';
+
+10. Películas de la categoria action que contenga behind_scenes.
+
+SELECT f.title
+FROM films AS f
+LEFT JOIN old_hdd AS o
+ON f.film_id = o.film_id
+LEFT JOIN category AS c
+ON c.category_id= o.category_id
+WHERE c.name= 'Action' AND f.behind_scenes= 'Yes';
+
+
 
