@@ -23,6 +23,6 @@ La limpieza de los csv la realizo en Jupyter Notebook y consistió en:
 ![Captura de pantalla 2022-11-06 155910](https://user-images.githubusercontent.com/113017465/200178293-e9536103-5c29-4cf9-91af-6b4941e14ef7.png)
  
   
-         Lanzamiento---> Modificaciones---->Reverse Engineer ---->Diagrama----> Relaciones---->Sincronización----->REZAR POR QUE NO HAYA FALLOS
+         Lanzamiento--> Modificaciones-->Reverse Engineer -->Diagrama--> Relaciones-->Sincronización-->REZAR POR QUE NO HAYA FALLOS
                        
 # 3 - Elaborar 10 querys para comprobar el correcto funcionamieto de nuestra base de datos.
