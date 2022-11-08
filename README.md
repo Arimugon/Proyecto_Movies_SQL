@@ -8,7 +8,7 @@ Se nos pide que:
   
   2.Exportemos todo el contenido de los csv y creemos una base de datos con relaciones (diagrama).
   
-  3.Lancemos 10 querys para comprobar el correcto funcionamiento de todo lo creado con anterioridad.
+  3.Lancemos 10 queries para comprobar el correcto funcionamiento de todo lo creado con anterioridad.
   
 # 1 - Limpieza de csv:
 
@@ -25,7 +25,7 @@ La limpieza de los csv la realizo en Jupyter Notebook y consistió en:
   
          Lanzamiento--> Modificaciones-->Reverse Engineer -->Diagrama--> Relaciones-->Sincronización-->REZAR POR QUE NO HAYA FALLOS
                        
-# 3 - Elaborar 10 querys para comprobar el correcto funcionamieto de nuestra base de datos.
+# 3 - Elaborar 10 queries para comprobar el correcto funcionamieto de nuestra base de datos.
 
 ![Captura de pantalla 2022-11-06 155910](https://user-images.githubusercontent.com/113017465/200510321-7d370d11-2cb1-4f6b-b450-12e576aacf25.png)
 ![Captura de pantalla 2022-11-08 091257](https://user-images.githubusercontent.com/113017465/200510371-72b82317-89aa-46c7-8257-a629a63c7026.png)
